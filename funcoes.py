@@ -56,3 +56,31 @@ def calcula_pontos_sequencia_alta(dados):
    
     return 0
 
+def calcula_pontos_full_house(dados):
+    v_unicos = []
+    for d in dados:
+        if d not in v_unicos:
+            v_unicos.append(d)
+    if len(v_unicos) != 2:
+        return 0
+    cont1 = dados.count(v_unicos[0])
+    cont2 = dados.count(v_unicos[1])
+    if (cont1 == 3 and cont2 == 2) or (cont1 == 2 and cont2 == 3):    
+        soma = 0
+        for d in dados:
+            soma += d
+        return soma
+    return 0 
+
+def calcula_pontos_quadra(dados):
+    for v in dados:
+        cont = 0
+        for d in dados:
+            if d == v:
+                cont += 1
+        if cont >= 4:
+            soma = 0
+            for d in dados:
+                soma += d
+            return soma
+    return 0
