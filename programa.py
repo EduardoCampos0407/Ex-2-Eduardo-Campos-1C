@@ -1,1 +1,1 @@
-
+from funcoes import *
