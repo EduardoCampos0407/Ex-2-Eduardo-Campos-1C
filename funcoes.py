@@ -84,3 +84,34 @@ def calcula_pontos_quadra(dados):
                 soma += d
             return soma
     return 0
+
+def calcula_pontos_quina(dados):
+    for valor in dados:
+        cont = 0
+        for d in dados:
+            if d == valor:
+                cont += 1
+        if cont >= 5:
+            return 50
+    return 0
+
+def calcula_pontos_regra_avancada(dados):
+    return {
+        'cinco_iguais': calcula_pontos_quina(dados),
+        'full_house': calcula_pontos_full_house(dados),
+        'quadra': calcula_pontos_quadra(dados),
+        'sem_combinacao': calcula_pontos_soma(dados),
+        'sequencia_alta': calcula_pontos_sequencia_alta(dados),
+        'sequencia_baixa': calcula_pontos_sequencia_baixa(dados)
+    }
+
+def faz_jogada(dados, categoria, cartela_de_pontos):
+    pontos_simples = calcula_pontos_regra_simples(dados)
+    pontos_avancada = calcula_pontos_regra_avancada(dados)
+    if categoria in ['1', '2', '3', '4', '5', '6']:
+        categoria = int(categoria)
+    if categoria in pontos_simples:
+        cartela_de_pontos['regra_simples'][categoria] = pontos_simples[categoria]
+    else:
+        cartela_de_pontos['regra_avancada'][categoria] = pontos_avancada[categoria]
+    return cartela_de_pontos
